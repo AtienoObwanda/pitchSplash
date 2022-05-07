@@ -33,21 +33,16 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="{{ url_for('home') }}">Home</a>
-                        <a class="nav-item nav-link" href="{{ url_for('about') }}">Motivation</a>
-                        <a class="nav-item nav-link" href="{{ url_for('about') }}">Religious</a>
-                        <a class="nav-item nav-link" href="{{ url_for('about') }}">Jokes</a>
+                        <a class="nav-item nav-link" href="{{ url_for('index') }}">Home</a>
+                        <a class="nav-item nav-link" href="{{ url_for('index') }}">Motivation</a>
+                        <a class="nav-item nav-link" href="{{ url_for('index') }}">Religious</a>
+                        <a class="nav-item nav-link" href="{{ url_for('index') }}">Jokes</a>
                     </div>
                     <!-- Navbar right-->
                     <div class="navbar-nav ms-auto">
-                        <!-- {% if current_user.is_authenticated %} -->
-                            <!-- <a class="nav-item nav-link align-right" href="{{ url_for('newPost') }}">New Post</a>
-                            <a class="nav-item nav-link align-right" href="{{ url_for('account') }}">Account</a>
-                            <a class="nav-item nav-link align-right" href="{{ url_for('logout') }}">Logout</a>
-                        {% else%} -->
-                            <a class="nav-item nav-link align-right" href="{{ url_for('login') }}">Login</a>
-                            <a class="nav-item nav-link align-right" href="{{ url_for('register') }}">Get Started</a>
-                        <!-- {% endif %} -->
+                        
+                            <a class="nav-item nav-link align-right" href="#">Login</a>
+                            <a class="nav-item nav-link align-right" href="#">Get Started</a>
                         </div>
                 </div> 
             </div>
