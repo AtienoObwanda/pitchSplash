@@ -4,7 +4,8 @@ class Config:
     '''
     Parent config class
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://atieno:mish@localhost/pitch'
+
 
 
 class ProdConfig(Config):
