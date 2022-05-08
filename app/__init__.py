@@ -1,10 +1,19 @@
 from flask import Flask
-from config import DevConfig
+from config import config_options
 
-# Initializing app
-app = Flask(__name__)
 
-# Setting up configuration
-app.config.from_object(DevConfig)
+def create_app(config_name):
+    # Initializing app
+    app = Flask(__name__)
 
-from app.main import views
+    # Creating the app configurations
+    app.config.from_object(config_options[config_name])
+
+    # Initializing flask extensions
+
+    # Registering the blueprint
+    from .main import main as main_blueprint
+    app.register_blueprint(main_blueprint)
+
+
+    return app

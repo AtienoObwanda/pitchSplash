@@ -1,5 +1,5 @@
 from flask import render_template
-from app import app
+from . import main
 
 
 pitches = [
@@ -51,7 +51,7 @@ pitches = [
 
 
 # Views
-@app.route('/')
+@main.route('/')
 def index():
 
     '''
