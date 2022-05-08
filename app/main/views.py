@@ -6,62 +6,17 @@ from . import main
 from ..models import Pitch
 from .. import db
 
-pitches = [
-    {
-        'author': 'Atieno Obwanda',
-        'content': 'Here and now... Today and always',
-        'date_posted': 'April 20, 2022'
-    },
-    {
-       
-        'author': 'Mishie Gee',
-        'content': 'As above, as Below',
-        'date_posted': 'June 20, 2022'
-    },
-    {
-       
-        'author': 'Mishie Gee',
-        'content': 'As above, as Below',
-        'date_posted': 'June 20, 2022'
-    },
-    {
-       
-        'author': 'Mishie Gee',
-        'content': 'As above, as Below',
-        'date_posted': 'June 20, 2022'
-    },
-    {
-       
-        'author': 'Mishie Gee',
-        'content': 'As above, as Below',
-        'date_posted': 'June 20, 2022'
-    },
-    {
-       
-        'author': 'Mishie Gee',
-        'content': 'As above, as Below',
-        'date_posted': 'June 20, 2022'
-    }
-]
-
-
-
-
-
-
-
-
-
-
 
 # Views
 @main.route('/')
+@main.route('/home')
 def index():
 
     '''
     View root page function that returns the index page and its data
     '''
-    return render_template('index.html', pitches=pitches)
+    pitches = Pitch.query.all()
+    return render_template('index.html', pitches=pitches, title='Pitch Splash-Just Pitch it!')
 
 
 @main.route('/pitch/new',methods=['GET', 'POST'])
@@ -76,4 +31,3 @@ def pitch():
         return redirect(url_for('main.index'))
     return render_template("pitch.html", title='Pitch-Splash | New Pitch', form=form)
 
-    
