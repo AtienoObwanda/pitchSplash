@@ -79,11 +79,11 @@ def account():
         current_user.email = form.email.data
         db.session.commit()
         flash(f'Account details for {form.username.data} successfully updated!', 'sucess')
-        return redirect(url_for('account'))
+        return redirect(url_for('auth.account'))
     elif request.method == 'GET':
         form.username.data = current_user.username # Populate user username on to the form
         form.email.data = current_user.email # Populate user email on to the form
     image = url_for('static', filename='profile/' + current_user.image) # route for default profile picture
      
-    return render_template("account.html", title='Account', image=image, form=form)
+    return render_template("auth/account.html", title='Account', image=image, form=form)
 
