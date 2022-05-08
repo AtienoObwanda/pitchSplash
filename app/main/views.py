@@ -64,7 +64,7 @@ def index():
     return render_template('index.html', pitches=pitches)
 
 
-@main.route('/pitch/new')
+@main.route('/pitch/new',methods=['GET', 'POST'])
 @login_required
 def pitch():
     form = PitchForm()
