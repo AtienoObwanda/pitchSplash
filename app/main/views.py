@@ -25,9 +25,17 @@ def general():
     return render_template('general.html', pitch=pitch, title='General Pitches', pitches=pitches)
 
 
+@main.route('/fun')
+def fun():
+    pitches = Pitch.query.all()
+    pitch = Pitch.query.filter_by(category='Fun').all()
+    return render_template('fun.html', pitch=pitch, title='Fun Pitches', pitches=pitches)
 
-
-
+@main.route('/career')
+def career():
+    pitches = Pitch.query.all()
+    pitch = Pitch.query.filter_by(category='Career').all()
+    return render_template('career.html', pitch=pitch, title='Career Pitches', pitches=pitches)
 
 
 @main.route('/pitch/new',methods=['GET', 'POST'])
