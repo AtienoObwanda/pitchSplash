@@ -31,3 +31,13 @@ def pitch():
         return redirect(url_for('main.index'))
     return render_template("pitch.html", title='Pitch-Splash | New Pitch', form=form)
 
+@main.route('/react/<int:pitch_id>')
+@login_required
+def react(pitch_id):
+    pitch = Pitch.query.get_or_404(pitch_id)
+    if pitch not in current_user.pitches_liked.all():
+        current_user.pitches_liked.append(pitch)
+    else:
+        current_user.pitches_liked.remove(pitch)
+        db.session.commit()
+        return '',200
