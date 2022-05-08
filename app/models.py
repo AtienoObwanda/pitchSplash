@@ -52,5 +52,8 @@ class Comment(db.Model):
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'),nullable=False)
     comment = db.Column(db.String(100))
 
+
+
+
 def __repr__(self):
     return f'User({self.comment})'
