@@ -28,3 +28,12 @@ class RegistrationForm(FlaskForm):
         user= User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError('Email is already in use!')
+
+
+class LoginForm(FlaskForm):
+    email = StringField('Email',validators=[DataRequired(),Email()])
+    password = PasswordField('Password',
+                    validators=[DataRequired(),Length(min=6,max=12)])
+
+    remember = BooleanField('Remember Me')
+    submit = SubmitField('Login')
