@@ -8,10 +8,7 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 # Defining likes:
-likes = db.Table('likes',
-                 db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-                 db.Column('pitch_id', db.Integer, db.ForeignKey('pitch.id'))
-                 )
+
 
 
 
