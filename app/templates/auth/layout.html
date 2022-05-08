@@ -40,9 +40,16 @@
                     </div>
                     <!-- Navbar right-->
                     <div class="navbar-nav ms-auto">
-                        
-                            <a class="nav-item nav-link align-right" href="{{ url_for('auth.login') }}">Login</a>
-                            <a class="nav-item nav-link align-right" href="{{ url_for('auth.register') }}">Get Started</a>
+                            {% if current_user.is_authenticated %}
+                            <a class="nav-item nav-link align-right" href="#">New Post</a>
+                            <a class="nav-item nav-link align-right" href="{{ url_for('auth.account') }}">Account</a>
+                            <a class="nav-item nav-link align-right" href="{{ url_for('auth.logout') }}">Logout</a>
+                            {% else%}
+
+                                <a class="nav-item nav-link align-right" href="{{ url_for('auth.login') }}">Login</a>
+                                <a class="nav-item nav-link align-right" href="{{ url_for('auth.register') }}">Get Started</a>
+                            {% endif %}
+
                         </div>
                 </div> 
             </div>
