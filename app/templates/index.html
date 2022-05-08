@@ -4,15 +4,26 @@
         {% for pitch in pitches %}
             <div class="col-sm-4">
                 <article class="media content-section" style="border:none;box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.3);border-radius: 5px;">
-                    <div class="media-body">
-                    <div class="article-metadata">
-                        <p class="mr-2 text-center">{{ pitch.author.username }}</p>
-                    </div>
-                    <p class="article-content"> <span style="color: #fea150">"</span> {{ pitch.content }} <span style="color: #fea150">"</span> </p>
+                    <div class="row">
+                        <div class="col">
+                            <img class="rounded-circle" article-img src="{{ url_for('static', filename='profile/' + pitch.author.image) }}">
+                        </div>
+                            <div class="media-body">
+                                <div class="article-metadata">
+                                <div class="col">
+                                    <p class="mr-2 text-center mt-0 pt-0">{{ pitch.author.username }}</p>
+                                </div>
+                            </div>
+                                <p class="article-content"> <span style="color: #fea150">"</span> {{ pitch.content }} <span style="color: #fea150">"</span> </p>
+                            </div>
                     </div>
                     <div class="media-footer">
-                        <small class="text-muted"> <span style="color: #fea150">{{ pitch.datePosted }}</span></small>
+                        <small class="text-muted align-left">Posted On: <span style="color: #fea150">{{ pitch.datePosted.strftime('%Y-%m-%d') }}</span></small>
+                        <span>  |  </span>
+                        <small class="text-muted align-right">Category:  <span style="color: #fea150">{{ pitch.category }}</span></small>
+                        
                     </div>
+                   
                 </article>
             </div>
         {% endfor %}
