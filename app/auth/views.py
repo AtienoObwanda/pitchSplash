@@ -6,7 +6,7 @@ from PIL import Image
 
 from .. import db,bcrypt
 from .forms import RegistrationForm, LoginForm,UpdateAccountForm
-from ..models import User
+from ..models import User,Pitch
 
 from . import auth
 
@@ -66,9 +66,13 @@ def save_picture(form_picture): # saving image
 
     return picture_fn
 
+
 @auth.route('/account',methods=['GET', 'POST'])
 @login_required #restricts the accoun page to only logged in users
 def account():
+    user_id = current_user._get_current_object().id
+    pitch = Pitch.query.filter_by(user_id=user_id ).all()
+    
     form = UpdateAccountForm()
     if form.validate_on_submit():
         if form.picture.data:
@@ -85,5 +89,5 @@ def account():
         form.email.data = current_user.email # Populate user email on to the form
     image = url_for('static', filename='profile/' + current_user.image) # route for default profile picture
      
-    return render_template("auth/account.html", title='Account', image=image, form=form)
+    return render_template("auth/account.html", title='Account', image=image, form=form,pitch=pitch)
 
