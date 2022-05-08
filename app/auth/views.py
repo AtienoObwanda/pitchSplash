@@ -25,7 +25,7 @@ def register():
         db.session.commit() # commit session
         flash(f'Account created successfully for {form.username.data}!', 'success')
         return redirect(url_for('login'))
-    return render_template("register.html", title='Flask Blog-Register',form=form)
+    return render_template("auth/register.html", title='Flask Blog-Register',form=form)
 
 
 
