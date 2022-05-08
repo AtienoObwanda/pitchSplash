@@ -16,13 +16,15 @@ def load_user(user_id):
 
 class User(UserMixin, db.Model):
 
-    id=db.Column(db.Integer, primary_key=True)
-    username=db.Column(db.String(15), unique=True, nullable=False)
-    email=db.Column(db.String(120), unique=True, nullable=False)
-    image=db.Column(db.String(120), nullable=False, default='default.jpg')
-    password=db.Column(db.String(60),nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(15), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    image = db.Column(db.String(120), nullable=False, default='default.jpg')
+    password = db.Column(db.String(60),nullable=False)
     pitches = db.relationship('Pitch', backref='author',lazy=True) #defining the one to many relationship btn pitch and author
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
+    like = db.relationship('Like',backref='user',lazy='dynamic')
+    dislikes = db.relationship('Dislike',backref='user',lazy='dynamic')
 
 
     def __repr__(self):
@@ -33,16 +35,20 @@ class User(UserMixin, db.Model):
 
 class Pitch (db.Model):
 
-    id=db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     datePosted = db.Column(db.DateTime, nullable=False,default=datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(255), index = True,nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the post author
     comment =  db.relationship('Comment',backref='pitch',lazy='dynamic')
+    like = db.relationship('Like',backref='pitch',lazy='dynamic')
+    dislikes = db.relationship('Dislike',backref='pitch',lazy='dynamic')
 
 def __repr__(self):
     return f"User({self.content},{self.datePosted})"
 
+
+# Comment
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
@@ -54,3 +60,18 @@ class Comment(db.Model):
 
 def __repr__(self):
     return f'User({self.comment})'
+
+
+#Like
+class Like(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'),nullable=False)
+    
+
+# Dislike
+class Dislike(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'),nullable=False)
+    
