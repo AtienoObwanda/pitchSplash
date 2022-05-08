@@ -16,5 +16,5 @@ class PitchForm(FlaskForm):
 
 
 class CommentForm(FlaskForm):
-    body = StringField('Comment')
+    comment = StringField('Comment')
     submit = SubmitField('Comment')

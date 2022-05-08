@@ -10,8 +10,10 @@ def load_user(user_id):
 # Defining likes:
 likes = db.Table('likes',
                  db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
-                 db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
+                 db.Column('pitch_id', db.Integer, db.ForeignKey('pitch.id'))
                  )
+
+
 
 #User Model
 
@@ -23,6 +25,7 @@ class User(UserMixin, db.Model):
     image=db.Column(db.String(120), nullable=False, default='default.jpg')
     password=db.Column(db.String(60),nullable=False)
     pitches = db.relationship('Pitch', backref='author',lazy=True) #defining the one to many relationship btn pitch and author
+    comment = db.relationship('Comment', backref='user', lazy='dynamic')
 
 
     def __repr__(self):
@@ -38,7 +41,16 @@ class Pitch (db.Model):
     content = db.Column(db.Text, nullable=False)
     category = db.Column(db.String(255), index = True,nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the post author
+    comment =  db.relationship('Comment',backref='pitch',lazy='dynamic')
 
 def __repr__(self):
     return f"User({self.content},{self.datePosted})"
 
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'),nullable=False)
+    comment = db.Column(db.String(100))
+
+def __repr__(self):
+    return f'User({self.comment})'
