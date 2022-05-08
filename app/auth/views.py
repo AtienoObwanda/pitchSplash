@@ -9,7 +9,6 @@ from .forms import RegistrationForm, LoginForm,UpdateAccountForm
 from ..models import User
 
 from . import auth
-import app
 
 
 
