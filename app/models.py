@@ -7,6 +7,12 @@ from . import db, login_manager
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+# Defining likes:
+likes = db.Table('likes',
+                 db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+                 db.Column('post_id', db.Integer, db.ForeignKey('post.id'))
+                 )
+
 #User Model
 
 class User(UserMixin, db.Model):
