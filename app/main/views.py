@@ -49,15 +49,17 @@ def comment(pitch_id):
     return render_template("comment.html",pitch=pitch, title='React to Pitch!', form = form,allComments=allComments)
 
 
-@main.route('/pitch/<int:pitch_id>/react')
+@main.route('/like/<int:pitch_id>/',methods = ['GET'])
 @login_required
-def react(pitch_id):
-    pitch = Pitch.query.get_or_404(pitch_id)
-    if pitch not in current_user.pitches_liked.all():
-        current_user.pitches_liked.append(pitch)
-    else:
-        current_user.pitches_liked.remove(pitch)
-        db.session.commit()
-        return '',200
+def like(pitch_id):
+    pitch = Pitch.query.filter_by(id=pitch_id)
+    
+
+
+
+@main.route('/pitch/<int:pitch_id>/unreact',methods = ['POST','GET'])
+@login_required
+def unreact(pitch_id):
+    pass
 
 
