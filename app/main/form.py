@@ -13,3 +13,8 @@ class PitchForm(FlaskForm):
     category = SelectField('Category', choices=[('General', 'General'),('Fun','Fun'),('Career','Career')],validators=[DataRequired()])
 
     submit = SubmitField('Splash Pitch')
+
+
+class CommentForm(FlaskForm):
+    body = StringField('Comment')
+    submit = SubmitField('Comment')
