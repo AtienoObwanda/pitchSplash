@@ -18,6 +18,17 @@ def index():
     pitches = Pitch.query.all()
     return render_template('index.html', pitches=pitches, title='Pitch Splash-Just Pitch it!')
 
+@main.route('/general')
+def general():
+    pitches = Pitch.query.all()
+    pitch = Pitch.query.filter_by(category='General').all()
+    return render_template('general.html', pitch=pitch, title='General Pitches', pitches=pitches)
+
+
+
+
+
+
 
 @main.route('/pitch/new',methods=['GET', 'POST'])
 @login_required
