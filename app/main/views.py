@@ -3,7 +3,7 @@ from flask_login import login_required,current_user
 
 from .forms import PitchForm, CommentForm
 from . import main
-from ..models import Pitch, Comment
+from ..models import Dislike, Pitch, Comment, Like
 from .. import db
 
 
@@ -49,17 +49,40 @@ def comment(pitch_id):
     return render_template("comment.html",pitch=pitch, title='React to Pitch!', form = form,allComments=allComments)
 
 
-@main.route('/like/<int:pitch_id>/',methods = ['GET'])
+@main.route('/like/<pitch_id>/',methods = ['GET'])
 @login_required
 def like(pitch_id):
     pitch = Pitch.query.filter_by(id=pitch_id)
-    
+    like = Like.query.filter_by(author= current_user.id, pitch_id=pitch_id).first()
+    dislike = Dislike.query.filter_by(author= current_user.id, pitch_id=pitch_id).first()
 
+    if not pitch:
+        flash('Pitch not found',category='error')
+    elif like:
+        return redirect(url_for('main.index', pitch_id=pitch_id))
+    else:
+        db.session.delete(dislike)
+        like= Like(author=current_user.id, pitch_id=pitch_id)
+        db.session.add(like)
+        db.session.commit()
 
+    return redirect(url_for('main.index'))
 
-@main.route('/pitch/<int:pitch_id>/unreact',methods = ['POST','GET'])
+@main.route('/dislike/<pitch_id>/',methods = ['GET'])
 @login_required
-def unreact(pitch_id):
-    pass
+def dislike(pitch_id):
+    pitch = Pitch.query.filter_by(id=pitch_id)
+    dislike = Dislike.query.filter_by(author= current_user.id, pitch_id=pitch_id).first()
+    like = Like.query.filter_by(author= current_user.id, pitch_id=pitch_id).first()
 
+    if not pitch:
+        flash('Pitch not found',category='error')
+    elif dislike:
+        return redirect(url_for('main.index', pitch_id=pitch_id))
+    else:
+        db.session.delete(like)
+        dislike= Dislike(author=current_user.id, pitch_id=pitch_id)
+        db.session.add(dislike)
+        db.session.commit()
 
+    return redirect(url_for('main.index'))

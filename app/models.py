@@ -19,7 +19,8 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(60),nullable=False)
     pitches = db.relationship('Pitch', backref='author',lazy=True) #defining the one to many relationship btn pitch and author
     comment = db.relationship('Comment', backref='user', lazy='dynamic')
-    like =  db.relationship('Like',backref='user',lazy='dynamic')
+    likes =  db.relationship('Like',backref='user',lazy='dynamic')
+    dislikes =  db.relationship('Dislike',backref='user',lazy='dynamic')
 
 
     def __repr__(self):
@@ -36,7 +37,8 @@ class Pitch (db.Model):
     category = db.Column(db.String(255), index = True,nullable = False)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the post author
     comment =  db.relationship('Comment',backref='pitch',lazy='dynamic')
-    like =  db.relationship('Like',backref='pitch',lazy='dynamic')
+    likes =  db.relationship('Like',backref='pitch',lazy='dynamic')
+    dislikes =  db.relationship('Dislike',backref='pitch',lazy='dynamic')
 
 
 
@@ -60,6 +62,12 @@ def __repr__(self):
 
 class Like(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
+    author = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'),nullable=False)
+   
+
+class Dislike(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    author = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False) #Id of the user
     pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'),nullable=False)
    
