@@ -105,3 +105,21 @@ def dislike(pitch_id):
         db.session.commit()
 
     return redirect(url_for('main.index'))
+
+
+# Delete comment
+@main.route('/delete/comment/<comment_id>')
+@login_required
+
+def deleteComment(comment_id):
+    comment = Comment.query.filter(Comment.id == comment_id).first()
+
+    if not comment:
+        flash('Comment not found', category='error')
+    elif current_user.id != comment.user.id and  current_user.id != pitch.author.id:
+        flash('YOu are not authorized to delete this comment', category='error')
+    else:
+        db.session.delete(comment)
+        db.session.commit()
+    return redirect(url_for('main.index'))
+
