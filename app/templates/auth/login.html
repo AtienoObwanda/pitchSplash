@@ -3,14 +3,14 @@
     <div class="content-section">
         <div class="row">
             <div class="col">
-
+                <img src="{{ url_for('static', filename='login.png') }}" style="width: 100%; height:100%"/>
             </div>
             <div class="col">
                 <form method="POST" action="">
                     {{ form.hidden_tag() }}
                     <fieldset class="form-group">
-                        <legend class="border-bottom mb-4 text-center">Welcome Back</legend>
-                        <div class="form-group mb-2">
+                        <legend class="border-bottom mb-4 text-center" style="color:#fea150; font-weight: bold">Welcome Back</legend>
+                        <div class="form-group mb-4">
                             {{ form.email.label(class="form-control-label") }}
                             {% if form.email.errors %}
                                 {{ form.email(class="form-control form-control-lg is-invalid") }}
@@ -23,7 +23,7 @@
                                 {{ form.email(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
-                        <div class="form-group mb-2">
+                        <div class="form-group mb-4">
                             {{ form.password.label(class="form-control-label") }}
                             {% if form.password.errors %}
                                 {{ form.password(class="form-control form-control-lg is-invalid") }}
@@ -36,7 +36,7 @@
                                 {{ form.password(class="form-control form-control-lg") }}
                             {% endif %}
                         </div>
-                        <div class="form-check mb-2">
+                        <div class="form-check mb-4">
                             {{ form.remember(class="form-check-input")}}
                             {{ form.remember.label(class="form-check-label")}}
                         </div>
@@ -50,16 +50,22 @@
                             <div class="col"></div>
                         </div>
                     </div>
-                    <small class="text-muted ml-2">
-                        <a href="#">Forgot Password?</a>
-                    </small>
+                    
                 </form>
             </div>
-            <div class="border-top pt-3">
-                <small class="text-muted text-center">
-                    Need An Account? <a class="ml-2" href="{{ url_for('auth.register') }}">Get Started</a>
-                </small>
-            </div>
+                <div class="row border-top pt-3">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="">
+                            <small class="text-muted text-center">
+                                Need An Account? <a class="ml-2" href="{{ url_for('auth.register') }}" style="text-decoration: none;color:#fea150">Get Started</a> | <small class="text-muted ml-2">
+                                    <a href="#" style="text-decoration: none;color:#fea150">Forgot Password?</a>
+                                </small>
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col"></div>
+                </div>
         </div>
     </div>
 {% endblock content %}
