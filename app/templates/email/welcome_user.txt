@@ -1,0 +1,5 @@
+Dear {{user.username}}
+Welcome to Pitch Splash,
+You have successfully joined the Pitch Splash community. You can now login to pitch and comment on other pitches!
+Remember, all you have is a minute... So make it count!
+Just Pitch it!!!

@@ -4,6 +4,7 @@ from flask_login import login_user,current_user, logout_user, login_required
 import secrets
 from PIL import Image
 
+from ..email import mail_message
 from .. import db,bcrypt
 from .forms import RegistrationForm, LoginForm,UpdateAccountForm
 from ..models import User,Pitch
@@ -23,6 +24,9 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user) # add user
         db.session.commit() # commit session
+        
+        mail_message("You have successfully signed up for a Pitch Splash account","email/welcome_user",user.email,user=user)
+
         flash(f'Account created successfully for {form.username.data}!', 'success')
         return redirect(url_for('auth.login'))
     return render_template("auth/register.html", title='Flask Blog-Register',form=form)
