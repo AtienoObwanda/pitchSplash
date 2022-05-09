@@ -10,11 +10,16 @@ class Config:
     # Mail confugurations
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
-    MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
-    MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
+    MAIL_USE_SSL=True
+    MAIL_USE_TLS=False
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    SUBJECT_PREFIX = 'PITCH SPLASH!'
+    SENDER_EMAIL = 'splashpitch@gmail.com'
 
+    @staticmethod
+    def init_app(app):
+        pass
 
 class ProdConfig(Config):
     '''
@@ -24,6 +29,8 @@ class ProdConfig(Config):
     '''
 SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
+DEBUG = True
+
 
 class DevConfig(Config):
     '''
@@ -32,7 +39,6 @@ class DevConfig(Config):
         Config: The parent configuration class with General configuration settings
     '''
 
-DEBUG = True
 
 config_options = {
 'development':DevConfig,

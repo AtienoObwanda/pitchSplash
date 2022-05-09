@@ -7,14 +7,17 @@ from app import create_app,db
 from app.models import User, Pitch
 
 
-# App instance
+# App instance -> creating app instance
 app = create_app('production')
 
 manager = Manager(app)
-migrate = Migrate(app,db)
+manager.add_command('server',Server)
 
-manager.add_command('db', MigrateCommand)
-manager.add_command('run',Server(use_debugger=True))
+@manager.command
+def test():
+    import unittest
+    tests = unittest.TestLoader().discover('tests')
+    unittest.TextTestRunner(verbosity=2).run(tests)
 
 
 @manager.shell
@@ -22,11 +25,11 @@ def make_shell_context():
     return dict(app=app,db=db,User=User, Pitch=Pitch)
 
 
-@manager.command
-def test():
-    import unittest
-    tests = unittest.TestLoader().discover('tests')
-    unittest.TextTestRunner(verbosity=2).run(tests)
+migrate = Migrate(app,db)
+manager.add_command('db', MigrateCommand)
+
+
+
 
 if __name__ == '__main__':
     manager.run()
