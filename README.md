@@ -69,10 +69,12 @@ atom .
 ![Alt text](./app/static/projectScreenshots/pitch.png?raw=true "Optional Title")
 
 <br/>
+
 **View Your Pitch from your account:**
 ![Alt text](./app/static/projectScreenshots/profilePitch.png?raw=true "Optional Title")
 
 <br />
+
 **React to pitch-Also added delete function to comments, exclusively to pitch authors and comment author:**
 ![Alt text](./app/static/projectScreenshots/react.png?raw=true "Optional Title")
 
