@@ -61,3 +61,23 @@ class UpdateAccountForm(FlaskForm):
             user= User.query.filter_by(email=email.data).first()
             if user:
                 raise ValidationError('Email is already in use!')
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email',validators=[DataRequired(),Email()])
+
+    submit = SubmitField('Reset Password')
+
+    def validate_email(self, email):
+        user= User.query.filter_by(email=email.data).first()
+        if user is None:
+            raise ValidationError('There is no account with that email, kindly SIGNUP!')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password',
+                    validators=[DataRequired(),Length(min=6,max=12),
+                    EqualTo('confirm_password',message = 'Passwords must match')])
+    confirm_password = PasswordField('Confirm Password',
+                    validators=[DataRequired(),EqualTo('password')])
+
+    submit = SubmitField('Confirm Reset Password')
