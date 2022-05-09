@@ -26,7 +26,7 @@ def register():
         db.session.add(user) # add user
         db.session.commit() # commit session
         
-        # mail_message("You have successfully signed up for a Pitch Splash account","email/welcome_user",user.email, user = user)
+        mail_message("You have successfully signed up for a Pitch Splash account","email/welcome_user",user.email, user = user)
 
         flash(f'Account created successfully for {form.username.data}!', 'success')
         return redirect(url_for('auth.login'))
