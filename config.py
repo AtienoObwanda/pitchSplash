@@ -12,10 +12,10 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS=True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    # MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SUBJECT_PREFIX = 'PITCH SPLASH!'
     SENDER_EMAIL = 'splashpitch@gmail.com'
-    MAIL_PASSWORD = 'afSG7AyE123clear'
+    # MAIL_PASSWORD = 'afSG7AyE123clear'
     @staticmethod
     def init_app(app):
         pass
