@@ -2,7 +2,8 @@
     {% block content %}
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col"></div>
+                    <div class="col-sm-8">
                         <article class="media content-section" style="border:none;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;border-radius: 5px;">
                             <div class="row">
                                 <div class="col">
@@ -19,6 +20,9 @@
                             </div>
                             <div class="media-footer">
                                 <div class="media-footer">
+                                    <a class="ms-5" style="text-decoration: none;"></a>
+                                    <a class="ms-5" style="text-decoration: none;"></a>
+
                                     <a class="ms-5" style="text-decoration: none;"></a>
                                     <a class="ms-5" style="text-decoration: none;" href="{{ url_for('main.like', pitch_id=pitch.id) }}">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#fea150" class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
@@ -46,13 +50,64 @@
                                         <small class="text-muted align-right">Category:  <span style="color: #fea150">{{ pitch.category }}</span></small>
                                
                                     </div>
-                                <div>
+                                    <div>
+                                        <form method="POST" action="">
+                                            {{ form.hidden_tag() }}
+                                            <div class="row border-top">
+                                                <div class="col">
+                                                    <fieldset class="form-group">
+                                                        <div class="form-group mb-2">
+                                                            {{ form.comment.label(class="form-control-label") }}
+                                                            {% if form.comment.errors %}
+                                                                {{ form.comment(class="form-control form-control-lg is-invalid") }}
+                                                                <div class="invalid-feedback">
+                                                                    {% for error in form.comment.errors %}
+                                                                        <span>{{ error }}</span>
+                                                                    {% endfor %}
+                                                                </div>
+                                                            {% else %}
+                                                                {{ form.comment(class="form-control form-control-lg") }}
+                                                            {% endif %}
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col">
+                                                <div class="form-group pt-2 mt-2">                                                    
+                                                       
+                                                {{ form.submit(class="btn  btn-outline-info button-17") }}
+                                                </div>                                                
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                <div class="pt-2">
                                     {% for comment in allComments %}
-                                        <ul>
-                                            <li style="width:auto; list-style-type: none;">
-                                                <span>{{ comment.comment }} by <small class="text-muted">{{comment.user.username}}</small> </span>
-                                            </li>
-                                        </ul>
+                                        <div class="row">
+                                            <div class="col">
+                                                <ul>
+                                                    <li style="width:auto; list-style-type: none;">
+                                                        <span>{{ comment.comment }} by <small class="text-muted">{{comment.user.username}}</small> </span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col">
+                                                {% if current_user.id == comment.user.id or current_user.id == pitch.author.id %}
+                                                <a style="text-decoration: none">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fea150" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                                                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                                                      </svg>
+                                               </a>
+                                               {% endif %}
+                                               {% if current_user.id == comment.user.id %}
+                                               <a class="ms-5" style="text-decoration: none">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#fea150" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                                  </svg>
+                                                </a>
+                                               {% endif %}
+                                            </div>
+                                        </div>
                                     {% endfor %}
                                     
                                 </div>
@@ -60,41 +115,9 @@
                            
                         </article>
                     </div>
-                    <div class="col-sm-2"></div>
+                    <div class="col"></div>
                     <!--COMMENT FORM-->
-                    <div class="col-sm-4">
-                        <div class="content-section" style=" border-radius: 5px;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
-                            <form method="POST" action="">
-                                {{ form.hidden_tag() }}
-                                <fieldset class="form-group">
-                                    <legend class="border-bottom mb-4 text-center">Drop a Comment</legend>
-                                    <div class="form-group mb-2">
-                                        {{ form.comment.label(class="form-control-label") }}
-                                        {% if form.comment.errors %}
-                                            {{ form.comment(class="form-control form-control-lg is-invalid") }}
-                                            <div class="invalid-feedback">
-                                                {% for error in form.comment.errors %}
-                                                    <span>{{ error }}</span>
-                                                {% endfor %}
-                                            </div>
-                                        {% else %}
-                                            {{ form.comment(class="form-control form-control-lg") }}
-                                        {% endif %}
-                                    </div>
-                                   
-                                </fieldset>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col"></div>
-                                        <div class="col">
-                                            {{ form.submit(class="btn btn-outline-info button-17") }}
-                                        </div>
-                                        <div class="col"></div>
-                                    </div>
-                                </div>
-                            </form>
-                       </div>
-                    </div>
+                  
                 </div>
             </div>
 {% endblock content %}
