@@ -1,27 +1,27 @@
 import unittest
-from app.models import User,Comments, Pitches
+from app.models import User,Comment,Pitch
 
 class UserModelTest(unittest.TestCase):
     def setUp(self):
-        self.new_user = User(password = 'barida')
+        self.new_user = User(password = 'new123')
     def test_password_setter(self):
         self.assertTrue(self.new_user.password_hash is not None)
     def test_no_access_password(self):
         with self.assertRaises(AttributeError):
             self.new_user.password
     def test_password_verification(self):
-        self.assertTrue(self.new_user.verify_password('barida'))
+        self.assertTrue(self.new_user.verify_password('new123'))
 
 class CommentsModelTest(unittest.TestCase):
     def setUp(self):
-       self.new_comment = Comments(id=1, user_id = 3, comment = 'awesome',pitches_id = '10',date_posted='2022-05-08')
+       self.new_comment = Comment(id=1, user_id = 1, comment = 'pin this',pitch_id = '6',date_posted='2022-05-08')
     def test_comment_variables(self):
-       self.assertEquals(self.new_comment.comment,'awesome')
+       self.assertEquals(self.new_comment.comment,'pin this')
        self.assertEquals(self.new_comment.date_posted,'2022-05-08')
-       self.assertEquals(self.new_comment.user_id, 3)
+       self.assertEquals(self.new_comment.user_id, 1)
     def test_save_comment(self):
-        self.assertTrue(len(Comments.query.all())>0)
+        self.assertTrue(len(Comment.query.all())>0)
         
 class PitchesModelTest(unittest.TestCase):
     def test_save_pitch(self):
-        self.assertTrue(len(Pitches.query.all())>0)
+        self.assertTrue(len(Pitch.query.all())>0)
