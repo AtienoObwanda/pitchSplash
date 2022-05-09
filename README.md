@@ -59,16 +59,18 @@ atom .
 **Login:** <br />
 ![Alt text](./app/static/projectScreenshots/login.png?raw=true "Optional Title")
 
-
-**Account:**<br />
-![Alt text](./app/static/projectScreenshots/account.png?raw=true "Optional Title")
-
-<br/>
+<br />
 
 **Splash Pitch:**
 ![Alt text](./app/static/projectScreenshots/pitch.png?raw=true "Optional Title")
 
 <br/>
+
+**Account:** 
+![Alt text](./app/static/projectScreenshots/account.png?raw=true "Optional Title")
+
+<br/>
+
 
 **View Your Pitch from your account:**
 ![Alt text](./app/static/projectScreenshots/profilePitch.png?raw=true "Optional Title")
@@ -89,7 +91,7 @@ atom .
 *Bootstrap*<br />
 
 
-**Contact**
+**Contact:**
 ****
 
 *Incase of any question or contributions, you can contact me through:*
@@ -99,5 +101,5 @@ atom .
 **License**
 ****
 MIT License <br/>
-Copyright (c)2022 Pitch Splash. All rights reserved.
+**Copyright** *(c)2022* **Pitch Splash.** *All rights reserved.*
 
