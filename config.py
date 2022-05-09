@@ -15,7 +15,8 @@ class Config:
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SUBJECT_PREFIX = 'PITCH SPLASH!'
     SENDER_EMAIL = 'splashpitch@gmail.com'
-    # MAIL_PASSWORD = 'afSG7AyE123clear'
+
+    
     @staticmethod
     def init_app(app):
         pass
