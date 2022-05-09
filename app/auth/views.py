@@ -26,11 +26,11 @@ def register():
         db.session.add(user) # add user
         db.session.commit() # commit session
         
-        # mail_message("You have successfully signed up for a Pitch Splash account","email/welcome_user",form.email.data, user = user)
+        # mail_message("You have successfully signed up for a Pitch Splash account","email/welcome_user",user.email, user = user)
 
         flash(f'Account created successfully for {form.username.data}!', 'success')
         return redirect(url_for('auth.login'))
-    return render_template("auth/register.html", title='Flask Blog-Register',form=form)
+    return render_template("auth/register.html", title='Pitch Splash-Login',form=form)
 
 
 
@@ -47,7 +47,7 @@ def login():
             return redirect(next_page) if next_page else redirect(url_for('main.index')) # redirects to requested page after loggin in if it exists... if none, redirects to home page
         else:
             flash('Login Failed. Kindly check your email and password then try again','danger')
-    return render_template("auth/login.html",form=form,title='Flask Blog-Login')
+    return render_template("auth/login.html",form=form,title='Pitch Splash-Login')
 
 
 @auth.route('/logout')

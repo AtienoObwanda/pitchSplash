@@ -1,3 +1,7 @@
+import os
+import smtplib
+
+from instance.config import MAIL_PASSWORD
 from flask_mail import Message
 from flask import render_template
 from . import mail
