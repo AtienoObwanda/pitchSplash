@@ -16,7 +16,7 @@ class Config:
     SUBJECT_PREFIX = 'PITCH SPLASH!'
     SENDER_EMAIL = 'splashpitch@gmail.com'
 
-    
+
     @staticmethod
     def init_app(app):
         pass
@@ -33,6 +33,9 @@ if uri and uri.startswith('postgres://'):
         
 SQLALCHEMY_DATABASE_URI=uri
 
+DEBUG = True
+
+
 class TestConfig(Config):
     '''
     Test
@@ -48,7 +51,6 @@ class DevConfig(Config):
     '''
 SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
-DEBUG = True
 
 config_options = {
 'development':DevConfig,
