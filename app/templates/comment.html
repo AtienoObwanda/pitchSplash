@@ -3,7 +3,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-4">
-                        <article class="media content-section" style="border:none;box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.3);border-radius: 5px;">
+                        <article class="media content-section" style="border:none;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;border-radius: 5px;">
                             <div class="row">
                                 <div class="col">
                                     <img class="rounded-circle" article-img src="{{ url_for('static', filename='profile/' + pitch.author.image) }}">
@@ -63,7 +63,7 @@
                     <div class="col-sm-2"></div>
                     <!--COMMENT FORM-->
                     <div class="col-sm-4">
-                        <div class="content-section" style=" border-radius: 5px;box-shadow: 2px 0px 2px 0px #fea150;">
+                        <div class="content-section" style=" border-radius: 5px;box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                             <form method="POST" action="">
                                 {{ form.hidden_tag() }}
                                 <fieldset class="form-group">
