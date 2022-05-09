@@ -2,7 +2,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask_login import UserMixin
 from datetime import datetime
 
-from . import db, login_manager,app
+from . import db, login_manager
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -23,18 +23,17 @@ class User(UserMixin, db.Model):
     likes =  db.relationship('Like',backref='user',lazy='dynamic')
     dislikes =  db.relationship('Dislike',backref='user',lazy='dynamic')
 
-    def get_reset_token(self, expires_sec=3600): # Requested link expires in one hour
-        s= Serializer(app.config['SECRET_KEY'],expires_sec)
-        return s.dumps({'user_id':self.id}).decode('utf8')
+    # def get_reset_token(self, expires_sec=3600): # Requested link expires in one hour
+    #     return s.dumps({'user_id':self.id}).decode('utf8')
 
-    @staticmethod
-    def verify_reset_token(token): # validate token
-        s= Serializer(app.config['SECRET_KEY'])
-        try:
-            user_id = s.loads(token)['user_id']
-        except:
-            return None
-        return User.query.get(user_id)
+    # @staticmethod
+    # def verify_reset_token(token): # validate token
+    #     s= Serializer(app.config['SECRET_KEY'])
+    #     try:
+    #         user_id = s.loads(token)['user_id']
+    #     except:
+    #         return None
+    #     return User.query.get(user_id)
 
 
 

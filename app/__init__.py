@@ -9,7 +9,7 @@ from config import config_options
 
 # Initializing extensions
 db = SQLAlchemy()
-bcrypt = Bcrypt() # Password encryption
+bcrypt = Bcrypt() # Password encryption 
 
 
 # Login manager
