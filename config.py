@@ -12,9 +12,9 @@ class Config:
     MAIL_PORT = 587
     MAIL_USE_TLS=True
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
     SUBJECT_PREFIX = 'PITCH SPLASH!'
     SENDER_EMAIL = 'splashpitch@gmail.com'
-    MAIL_PASSWORD = 'afSG7AyE123clear'
 
     @staticmethod
     def init_app(app):
@@ -26,9 +26,17 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+uri = os.getenv('DATABASE_URL')
+if uri and uri.startswith('postgres://'):
+        uri = uri.replace('postgres://', 'postgresql://', 1)
+        
+SQLALCHEMY_DATABASE_URI=uri
 
-DEBUG = True
+class TestConfig(Config):
+    '''
+    Test
+    '''
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
 
 class DevConfig(Config):
@@ -37,9 +45,12 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
 
+DEBUG = True
 
 config_options = {
 'development':DevConfig,
-'production':ProdConfig
+'production':ProdConfig,
+'test':TestConfig,
 }
