@@ -80,7 +80,6 @@ def like(pitch_id):
     elif like:
         return redirect(url_for('main.index', pitch_id=pitch_id))
     else:
-        db.session.delete(dislike)
         like= Like(author=current_user.id, pitch_id=pitch_id)
         db.session.add(like)
         db.session.commit()
@@ -92,16 +91,16 @@ def like(pitch_id):
 def dislike(pitch_id):
     pitch = Pitch.query.filter_by(id=pitch_id)
     dislike = Dislike.query.filter_by(author= current_user.id, pitch_id=pitch_id).first()
-    like = Like.query.filter_by(author= current_user.id, pitch_id=pitch_id).first()
-
+    l = Like.query.filter_by(author= current_user.id, pitch_id=pitch_id).first()
+    
     if not pitch:
         flash('Pitch not found',category='error')
     elif dislike:
         return redirect(url_for('main.index', pitch_id=pitch_id))
     else:
-        db.session.delete(like)
-        dislike= Dislike(author=current_user.id, pitch_id=pitch_id)
-        db.session.add(dislike)
+      
+        d= Dislike(author=current_user.id, pitch_id=pitch_id)
+        db.session.add(d)
         db.session.commit()
 
     return redirect(url_for('main.index'))
@@ -123,3 +122,16 @@ def deleteComment(comment_id):
         db.session.commit()
     return redirect(url_for('main.index'))
 
+@main.route('/delete/pitch/<pitch_id>')
+@login_required
+def deletePitch(pitch_id):
+    pitch = Pitch.query.filter(Pitch.id == pitch_id).first()
+
+    if not pitch:
+        flash('Pitch not found', category='error')
+    elif  current_user.id != pitch.author.id:
+        flash('You are not authorized to delete this pitch', category='error')
+    else:
+        db.session.delete(pitch)
+        db.session.commit()
+    return redirect(url_for('main.index'))
