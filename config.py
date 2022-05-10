@@ -5,7 +5,7 @@ class Config:
     Parent config class
     '''
     SECRET_KEY =os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
     SQLALCHEMY_TRACK_MODIFICATIONS=True
     # Mail confugurations
     MAIL_SERVER = 'smtp.googlemail.com'
@@ -27,11 +27,14 @@ class ProdConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-uri = os.getenv('DATABASE_URL')
-if uri and uri.startswith('postgres://'):
-        uri = uri.replace('postgres://', 'postgresql://', 1)
-        
-SQLALCHEMY_DATABASE_URI=uri
+    # uri = os.getenv('DATABASE_URL')
+    # if uri and uri.startswith('postgres://'):
+    #         uri = uri.replace('postgres://', 'postgresql://', 1)
+            
+    # SQLALCHEMY_DATABASE_URI=uri
+
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
+
 
 DEBUG = True
 
@@ -40,7 +43,7 @@ class TestConfig(Config):
     '''
     Test
     '''
-SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 
 
 class DevConfig(Config):
@@ -49,7 +52,7 @@ class DevConfig(Config):
     Args:
         Config: The parent configuration class with General configuration settings
     '''
-SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL').replace("://", "ql://", 1)
 
 
 config_options = {
