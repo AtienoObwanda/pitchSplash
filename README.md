@@ -54,7 +54,19 @@ atom .
 
 **Project Features**
 ****
-*You have one minute to pitch...* <br />
+*You have one minute to pitch... Show us your pitch game* <br />
+
+**Sign Up:** <br />
+![Alt text](./app/static/projectScreenshots/signUp.png?raw=true "Optional Title")
+
+
+<br />
+
+**Check Your inbox for welcoming email:** <br />
+![Alt text](./app/static/projectScreenshots/email.png?raw=true "Optional Title")
+
+
+<br />
 
 **Login:** <br />
 ![Alt text](./app/static/projectScreenshots/login.png?raw=true "Optional Title")
