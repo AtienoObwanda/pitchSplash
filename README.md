@@ -9,7 +9,7 @@
                                                                         **Just Pitch it!**
 <br />
 
-<!-- **Live link:**  *https://pitchSplash.herokuapp.com/* <br /> -->
+**Live link:**  *https://pitchsplash.herokuapp.com/* <br />
 
 
 **Setup/Installation Requirements** 
